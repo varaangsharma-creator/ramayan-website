@@ -1,24 +1,6 @@
 /* ============================================================
    RESET & BASE
    ============================================================ */
-/* ============================================================
-   PERFORMANCE FIX - REDUCE ANIMATION LOAD
-   ============================================================ */
-
-/* Only animate if user doesn't prefer reduced motion */
-@media (prefers-reduced-motion: no-preference) {
-    .ram-flake {
-        animation-duration: calc(var(--duration) * 1) !important;
-    }
-}
-
-/* For users who prefer reduced motion - turn off animations */
-@media (prefers-reduced-motion: reduce) {
-    .ram-flake {
-        animation: none !important;
-        display: none !important;
-    }
-}
 * {
     margin: 0;
     padding: 0;
@@ -122,127 +104,6 @@ body {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-/* ============================================================
-   "राम" FLOATING TEXT - GOLDEN/RED PARTICLES
-   ============================================================ */
-
-.ram-flakes-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-}
-
-.ram-flake {
-    position: absolute;
-    bottom: -30px;
-    font-family: 'Noto Serif Devanagari', serif;
-    font-weight: 700;
-    opacity: 0;
-    animation: riseRamFlake linear infinite;
-    pointer-events: none;
-    text-shadow: 0 0 20px currentColor, 0 0 60px currentColor;
-    user-select: none;
-}
-
-.ram-flake.golden {
-    color: #ffd700;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.4), 0 0 100px rgba(255, 215, 0, 0.2);
-}
-
-.ram-flake.red {
-    color: #ff4500;
-    text-shadow: 0 0 20px rgba(255, 69, 0, 0.8), 0 0 60px rgba(255, 69, 0, 0.4), 0 0 100px rgba(255, 69, 0, 0.2);
-}
-
-.ram-flake.orange {
-    color: #ff8c00;
-    text-shadow: 0 0 20px rgba(255, 140, 0, 0.8), 0 0 60px rgba(255, 140, 0, 0.4), 0 0 100px rgba(255, 140, 0, 0.2);
-}
-
-@keyframes riseRamFlake {
-    0% {
-        transform: translateY(0) translateX(0) scale(0.5) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.8;
-    }
-    20% {
-        opacity: 1;
-    }
-    80% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 0.8;
-    }
-    100% {
-        transform: translateY(-110vh) translateX(var(--drift)) scale(1.2) rotate(720deg);
-        opacity: 0;
-    }
-}
-
-/* Ensure content is above flakes */
-.page.active {
-    position: relative;
-    z-index: 1;
-}
-
-.home-content,
-.book-container,
-.characters-container,
-.about-container {
-    position: relative;
-    z-index: 1;
-}
-
-.bottom-nav {
-    z-index: 200 !important;
-}
-
-.theme-toggle,
-.theme-toggle-small {
-    z-index: 100 !important;
-}
-
-/* Mobile optimization for flakes */
-@media (max-width: 768px) {
-    .ram-flake {
-        animation-duration: calc(var(--duration) * 1.5) !important;
-        opacity: 0.6 !important;
-    }
-    
-    .ram-flake.golden {
-        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-    }
-    
-    .ram-flake.red {
-        text-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
-    }
-    
-    .ram-flake.orange {
-        text-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
-    }
-}
-
-@media (max-width: 480px) {
-    .ram-flake {
-        opacity: 0.4 !important;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .ram-flake {
-        animation-duration: 30s !important;
-        opacity: 0.2 !important;
-    }
 }
 
 /* ============================================================
@@ -366,6 +227,44 @@ body {
     font-style: italic;
     opacity: 0.7;
     margin-top: 4px;
+}
+
+/* ============================================================
+   SOCIAL LINKS - INSTAGRAM
+   ============================================================ */
+
+.social-links {
+    margin: 8px 0 4px;
+}
+
+.social-link {
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.social-link.instagram {
+    color: #ffffff;
+    background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    box-shadow: 0 4px 16px rgba(220, 39, 67, 0.3);
+}
+
+.social-link.instagram:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(220, 39, 67, 0.4);
+}
+
+[data-theme="dark"] .social-link.instagram {
+    box-shadow: 0 4px 16px rgba(220, 39, 67, 0.5);
+}
+
+[data-theme="dark"] .social-link.instagram:hover {
+    box-shadow: 0 8px 24px rgba(220, 39, 67, 0.7);
 }
 
 /* ============================================================
@@ -1001,6 +900,15 @@ body {
     margin-top: 2px;
 }
 
+.about-social {
+    margin-top: 8px;
+}
+
+.about-social .social-link {
+    font-size: 0.9rem;
+    padding: 8px 24px;
+}
+
 /* ============================================================
    BOTTOM NAVIGATION
    ============================================================ */
@@ -1186,6 +1094,11 @@ body {
     .about-closing p {
         font-size: 1rem;
     }
+
+    .social-link {
+        font-size: 0.75rem;
+        padding: 5px 14px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1337,6 +1250,11 @@ body {
     .about-name {
         font-size: 1rem;
     }
+
+    .about-social .social-link {
+        font-size: 0.8rem;
+        padding: 6px 18px;
+    }
 }
 
 @media (max-width: 360px) {
@@ -1379,66 +1297,5 @@ body {
     .nav-btn-top {
         padding: 4px 10px;
         font-size: 0.6rem;
-    }
-}
-/* ============================================================
-   SOCIAL LINKS - INSTAGRAM
-   ============================================================ */
-
-.social-links {
-    margin: 8px 0 4px;
-}
-
-.social-link {
-    display: inline-block;
-    padding: 6px 18px;
-    border-radius: 30px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    font-family: 'Inter', sans-serif;
-}
-
-.social-link.instagram {
-    color: #ffffff;
-    background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    box-shadow: 0 4px 16px rgba(220, 39, 67, 0.3);
-}
-
-.social-link.instagram:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(220, 39, 67, 0.4);
-}
-
-/* About page social */
-.about-social {
-    margin-top: 8px;
-}
-
-.about-social .social-link {
-    font-size: 0.9rem;
-    padding: 8px 24px;
-}
-
-/* Dark theme adjustments */
-[data-theme="dark"] .social-link.instagram {
-    box-shadow: 0 4px 16px rgba(220, 39, 67, 0.5);
-}
-
-[data-theme="dark"] .social-link.instagram:hover {
-    box-shadow: 0 8px 24px rgba(220, 39, 67, 0.7);
-}
-
-/* Mobile responsive */
-@media (max-width: 480px) {
-    .social-link {
-        font-size: 0.75rem;
-        padding: 5px 14px;
-    }
-    
-    .about-social .social-link {
-        font-size: 0.8rem;
-        padding: 6px 18px;
     }
 }
