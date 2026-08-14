@@ -1,4 +1,43 @@
 // ============================================================
+// "राम" FLOATING TEXT - GOLDEN/RED PARTICLES
+// ============================================================
+
+(function createRamFlakes() {
+    var container = document.getElementById('ramFlakesContainer');
+    if (!container) return;
+    
+    var colors = ['golden', 'red', 'orange'];
+    var sizes = [20, 26, 32, 38, 44, 50, 56, 62];
+    
+    var count = 30;
+    if (window.innerWidth < 480) count = 12;
+    else if (window.innerWidth < 768) count = 20;
+    
+    for (var i = 0; i < count; i++) {
+        var flake = document.createElement('div');
+        var color = colors[Math.floor(Math.random() * colors.length)];
+        var size = sizes[Math.floor(Math.random() * sizes.length)];
+        var duration = 14 + Math.random() * 20;
+        var delay = Math.random() * 18;
+        var left = Math.random() * 100;
+        var drift = (Math.random() - 0.5) * 250;
+        var rotation = Math.random() * 360;
+        
+        flake.className = 'ram-flake ' + color;
+        flake.textContent = 'राम';
+        flake.style.fontSize = size + 'px';
+        flake.style.left = left + '%';
+        flake.style.setProperty('--duration', duration + 's');
+        flake.style.setProperty('--drift', drift + 'px');
+        flake.style.animationDuration = duration + 's';
+        flake.style.animationDelay = delay + 's';
+        flake.style.transform = 'rotate(' + rotation + 'deg)';
+        
+        container.appendChild(flake);
+    }
+})();
+
+// ============================================================
 // STATE
 // ============================================================
 let currentChapterIndex = 0;
@@ -11,6 +50,7 @@ let totalChapters = 0;
 const homePage = document.getElementById('homePage');
 const readingPage = document.getElementById('readingPage');
 const charactersPage = document.getElementById('charactersPage');
+const aboutPage = document.getElementById('aboutPage');
 
 // ============================================================
 // INIT
@@ -20,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
     loadThemePreference();
     loadProgress();
 
-    // Auto-save note on input
     const noteBox = document.getElementById('userNote');
     if (noteBox) {
         let timeout;
@@ -30,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // If there's saved progress, show it on home page
     updateProgressHint();
 });
 
@@ -40,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function goHome() {
     readingPage.classList.remove('active');
     charactersPage.classList.remove('active');
+    aboutPage.classList.remove('active');
     homePage.classList.add('active');
     updateProgressHint();
 }
@@ -47,6 +86,7 @@ function goHome() {
 function startReading() {
     homePage.classList.remove('active');
     charactersPage.classList.remove('active');
+    aboutPage.classList.remove('active');
     readingPage.classList.add('active');
     loadProgress();
     renderChapter();
@@ -55,7 +95,15 @@ function startReading() {
 function showCharacters() {
     homePage.classList.remove('active');
     readingPage.classList.remove('active');
+    aboutPage.classList.remove('active');
     charactersPage.classList.add('active');
+}
+
+function showAbout() {
+    homePage.classList.remove('active');
+    readingPage.classList.remove('active');
+    charactersPage.classList.remove('active');
+    aboutPage.classList.add('active');
 }
 
 // ============================================================
@@ -93,7 +141,6 @@ function setLanguage(lang) {
     const btn = document.getElementById('lang-' + lang);
     if (btn) btn.classList.add('active-lang');
 
-    // Add/remove Sanskrit class for font
     document.body.classList.remove('lang-sa');
     if (lang === 'sa') {
         document.body.classList.add('lang-sa');
@@ -115,51 +162,39 @@ function renderChapter() {
     const chapter = getChapter(currentChapterIndex);
     if (!chapter) return;
 
-    // Title
     document.getElementById('chapterTitle').textContent = chapter.title;
-
-    // Image
     document.getElementById('chapterImage').src = chapter.image;
-
-    // Setting
     document.getElementById('settingText').textContent = chapter.setting;
 
-    // Story (based on language)
     let text = chapter.en;
     if (currentLanguage === 'hi') text = chapter.hi;
     if (currentLanguage === 'sa') text = chapter.sa;
     document.getElementById('storyContent').textContent = text;
 
-    // Question
     document.getElementById('questionText').textContent = chapter.question;
-
-    // Answer
     document.getElementById('answerText').textContent = chapter.answer;
-
-    // Takeaway
     document.getElementById('takeawayText').textContent = chapter.takeaway;
 
-    // Chapter number
     document.getElementById('chapterNumDisplay').textContent = chapter.id;
     document.getElementById('chapterCounter').textContent = (currentChapterIndex + 1) + ' / ' + totalChapters;
+    document.getElementById('chapterCounterTop').textContent = (currentChapterIndex + 1) + ' / ' + totalChapters;
 
-    // Navigation buttons
     const prevBtn = document.querySelector('.nav-btn:first-child');
     const nextBtn = document.querySelector('.nav-btn:last-child');
+    const prevBtnTop = document.querySelector('.nav-btn-top:first-child');
+    const nextBtnTop = document.querySelector('.nav-btn-top:last-child');
     if (prevBtn) prevBtn.disabled = currentChapterIndex === 0;
     if (nextBtn) nextBtn.disabled = currentChapterIndex >= totalChapters - 1;
+    if (prevBtnTop) prevBtnTop.disabled = currentChapterIndex === 0;
+    if (nextBtnTop) nextBtnTop.disabled = currentChapterIndex >= totalChapters - 1;
 
-    // Load saved note
     const savedNote = localStorage.getItem('ramayan-note-' + chapter.id);
     const noteBox = document.getElementById('userNote');
     if (noteBox && savedNote !== null) {
         noteBox.value = savedNote;
     }
 
-    // Save progress
     saveProgress();
-
-    // Update scroll position
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -196,7 +231,6 @@ function loadProgress() {
             currentChapterIndex = idx;
         }
     }
-    // Load language
     loadLanguagePreference();
 }
 
@@ -250,6 +284,7 @@ document.addEventListener('keydown', function(e) {
 window.goHome = goHome;
 window.startReading = startReading;
 window.showCharacters = showCharacters;
+window.showAbout = showAbout;
 window.setLanguage = setLanguage;
 window.toggleTheme = toggleTheme;
 window.nextChapter = nextChapter;
