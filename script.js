@@ -1,39 +1,46 @@
 // ============================================================
-// "राम" FLOATING TEXT - GOLDEN/RED PARTICLES
+// "राम" FLOATING TEXT - OPTIMIZED VERSION
 // ============================================================
 
 (function createRamFlakes() {
-    var container = document.getElementById('ramFlakesContainer');
-    if (!container) return;
-    
-    var colors = ['golden', 'red', 'orange'];
-    var sizes = [20, 26, 32, 38, 44, 50, 56, 62];
-    
-    var count = 30;
-    if (window.innerWidth < 480) count = 12;
-    else if (window.innerWidth < 768) count = 20;
-    
-    for (var i = 0; i < count; i++) {
-        var flake = document.createElement('div');
-        var color = colors[Math.floor(Math.random() * colors.length)];
-        var size = sizes[Math.floor(Math.random() * sizes.length)];
-        var duration = 14 + Math.random() * 20;
-        var delay = Math.random() * 18;
-        var left = Math.random() * 100;
-        var drift = (Math.random() - 0.5) * 250;
-        var rotation = Math.random() * 360;
+    try {
+        var container = document.getElementById('ramFlakesContainer');
+        if (!container) return;
         
-        flake.className = 'ram-flake ' + color;
-        flake.textContent = 'राम';
-        flake.style.fontSize = size + 'px';
-        flake.style.left = left + '%';
-        flake.style.setProperty('--duration', duration + 's');
-        flake.style.setProperty('--drift', drift + 'px');
-        flake.style.animationDuration = duration + 's';
-        flake.style.animationDelay = delay + 's';
-        flake.style.transform = 'rotate(' + rotation + 'deg)';
+        // REDUCED COUNT for better performance
+        var colors = ['golden', 'red', 'orange'];
+        var sizes = [18, 24, 30, 36, 42];
         
-        container.appendChild(flake);
+        // FEWER FLAKES - Performance fix
+        var count = 12;  // Reduced from 30
+        if (window.innerWidth < 480) count = 6;
+        else if (window.innerWidth < 768) count = 9;
+        
+        for (var i = 0; i < count; i++) {
+            var flake = document.createElement('div');
+            var color = colors[Math.floor(Math.random() * colors.length)];
+            var size = sizes[Math.floor(Math.random() * sizes.length)];
+            var duration = 18 + Math.random() * 15;  // Slower animation
+            var delay = Math.random() * 20;
+            var left = Math.random() * 90 + 5;
+            var drift = (Math.random() - 0.5) * 150;
+            var rotation = Math.random() * 360;
+            
+            flake.className = 'ram-flake ' + color;
+            flake.textContent = 'राम';
+            flake.style.fontSize = size + 'px';
+            flake.style.left = left + '%';
+            flake.style.setProperty('--duration', duration + 's');
+            flake.style.setProperty('--drift', drift + 'px');
+            flake.style.animationDuration = duration + 's';
+            flake.style.animationDelay = delay + 's';
+            flake.style.transform = 'rotate(' + rotation + 'deg)';
+            flake.style.opacity = '0.6';  // Lower opacity for performance
+            
+            container.appendChild(flake);
+        }
+    } catch(e) {
+        console.log('Ram flakes error:', e);
     }
 })();
 
@@ -56,20 +63,24 @@ const aboutPage = document.getElementById('aboutPage');
 // INIT
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
-    totalChapters = getTotalChapters();
-    loadThemePreference();
-    loadProgress();
+    try {
+        totalChapters = getTotalChapters();
+        loadThemePreference();
+        loadProgress();
 
-    const noteBox = document.getElementById('userNote');
-    if (noteBox) {
-        let timeout;
-        noteBox.addEventListener('input', function() {
-            clearTimeout(timeout);
-            timeout = setTimeout(saveUserNote, 1500);
-        });
+        const noteBox = document.getElementById('userNote');
+        if (noteBox) {
+            let timeout;
+            noteBox.addEventListener('input', function() {
+                clearTimeout(timeout);
+                timeout = setTimeout(saveUserNote, 1500);
+            });
+        }
+
+        updateProgressHint();
+    } catch(e) {
+        console.log('Init error:', e);
     }
-
-    updateProgressHint();
 });
 
 // ============================================================
@@ -159,43 +170,47 @@ function loadLanguagePreference() {
 // CHAPTER RENDERING
 // ============================================================
 function renderChapter() {
-    const chapter = getChapter(currentChapterIndex);
-    if (!chapter) return;
+    try {
+        const chapter = getChapter(currentChapterIndex);
+        if (!chapter) return;
 
-    document.getElementById('chapterTitle').textContent = chapter.title;
-    document.getElementById('chapterImage').src = chapter.image;
-    document.getElementById('settingText').textContent = chapter.setting;
+        document.getElementById('chapterTitle').textContent = chapter.title;
+        document.getElementById('chapterImage').src = chapter.image;
+        document.getElementById('settingText').textContent = chapter.setting;
 
-    let text = chapter.en;
-    if (currentLanguage === 'hi') text = chapter.hi;
-    if (currentLanguage === 'sa') text = chapter.sa;
-    document.getElementById('storyContent').textContent = text;
+        let text = chapter.en;
+        if (currentLanguage === 'hi') text = chapter.hi;
+        if (currentLanguage === 'sa') text = chapter.sa;
+        document.getElementById('storyContent').textContent = text;
 
-    document.getElementById('questionText').textContent = chapter.question;
-    document.getElementById('answerText').textContent = chapter.answer;
-    document.getElementById('takeawayText').textContent = chapter.takeaway;
+        document.getElementById('questionText').textContent = chapter.question;
+        document.getElementById('answerText').textContent = chapter.answer;
+        document.getElementById('takeawayText').textContent = chapter.takeaway;
 
-    document.getElementById('chapterNumDisplay').textContent = chapter.id;
-    document.getElementById('chapterCounter').textContent = (currentChapterIndex + 1) + ' / ' + totalChapters;
-    document.getElementById('chapterCounterTop').textContent = (currentChapterIndex + 1) + ' / ' + totalChapters;
+        document.getElementById('chapterNumDisplay').textContent = chapter.id;
+        document.getElementById('chapterCounter').textContent = (currentChapterIndex + 1) + ' / ' + totalChapters;
+        document.getElementById('chapterCounterTop').textContent = (currentChapterIndex + 1) + ' / ' + totalChapters;
 
-    const prevBtn = document.querySelector('.nav-btn:first-child');
-    const nextBtn = document.querySelector('.nav-btn:last-child');
-    const prevBtnTop = document.querySelector('.nav-btn-top:first-child');
-    const nextBtnTop = document.querySelector('.nav-btn-top:last-child');
-    if (prevBtn) prevBtn.disabled = currentChapterIndex === 0;
-    if (nextBtn) nextBtn.disabled = currentChapterIndex >= totalChapters - 1;
-    if (prevBtnTop) prevBtnTop.disabled = currentChapterIndex === 0;
-    if (nextBtnTop) nextBtnTop.disabled = currentChapterIndex >= totalChapters - 1;
+        const prevBtn = document.querySelector('.nav-btn:first-child');
+        const nextBtn = document.querySelector('.nav-btn:last-child');
+        const prevBtnTop = document.querySelector('.nav-btn-top:first-child');
+        const nextBtnTop = document.querySelector('.nav-btn-top:last-child');
+        if (prevBtn) prevBtn.disabled = currentChapterIndex === 0;
+        if (nextBtn) nextBtn.disabled = currentChapterIndex >= totalChapters - 1;
+        if (prevBtnTop) prevBtnTop.disabled = currentChapterIndex === 0;
+        if (nextBtnTop) nextBtnTop.disabled = currentChapterIndex >= totalChapters - 1;
 
-    const savedNote = localStorage.getItem('ramayan-note-' + chapter.id);
-    const noteBox = document.getElementById('userNote');
-    if (noteBox && savedNote !== null) {
-        noteBox.value = savedNote;
+        const savedNote = localStorage.getItem('ramayan-note-' + chapter.id);
+        const noteBox = document.getElementById('userNote');
+        if (noteBox && savedNote !== null) {
+            noteBox.value = savedNote;
+        }
+
+        saveProgress();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch(e) {
+        console.log('Render chapter error:', e);
     }
-
-    saveProgress();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ============================================================
