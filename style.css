@@ -127,6 +127,8 @@ body {
 .hero-image-wrapper img {
     width: 100%;
     height: auto;
+    max-height: 400px;
+    object-fit: cover;
     display: block;
 }
 
@@ -300,18 +302,29 @@ body {
     color: #ffffff;
 }
 
-/* Chapter Image */
+/* Chapter Image - FIXED FOR MOBILE */
 .chapter-image-wrapper {
     width: 100%;
     border-radius: 16px;
     overflow: hidden;
     margin-bottom: 24px;
     box-shadow: var(--shadow);
+    position: relative;
 }
 
 .chapter-image-wrapper img {
     width: 100%;
-    max-height: 300px;
+    height: auto;
+    max-height: 320px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Character Images - FIXED FOR MOBILE */
+.character-card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
     object-fit: cover;
     display: block;
 }
@@ -629,7 +642,7 @@ body {
 }
 
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE - FIXED FOR MOBILE
    ============================================================ */
 @media (max-width: 720px) {
     .home-container h1 {
@@ -651,6 +664,7 @@ body {
     .top-left,
     .top-right {
         justify-content: center;
+        flex-wrap: wrap;
     }
 
     .language-switch {
@@ -678,11 +692,11 @@ body {
     }
 
     .characters-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .character-card img {
-        height: 200px;
+        height: 180px;
     }
 
     .theme-toggle {
@@ -705,9 +719,13 @@ body {
         padding: 14px 40px;
         font-size: 1rem;
     }
+
+    .chapter-image-wrapper img {
+        max-height: 200px;
+    }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
     .home-container h1 {
         font-size: 2.2rem;
     }
@@ -719,6 +737,7 @@ body {
 
     .book-container {
         padding: 16px 14px 24px;
+        margin: 8px 8px 32px;
     }
 
     .question-box p,
@@ -730,5 +749,115 @@ body {
     .setting-box {
         font-size: 0.95rem;
         padding: 16px 18px;
+    }
+
+    .characters-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .character-card img {
+        height: 200px;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .top-left {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .top-right {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .language-switch {
+        gap: 3px;
+    }
+
+    .lang-btn {
+        font-size: 0.65rem;
+        padding: 3px 10px;
+    }
+
+    .chapter-image-wrapper img {
+        max-height: 160px;
+    }
+
+    #chapterTitle {
+        font-size: 1.3rem;
+    }
+
+    .story-text {
+        font-size: 0.95rem;
+        line-height: 1.8;
+    }
+
+    .nav-btn {
+        padding: 8px 18px;
+        font-size: 0.8rem;
+    }
+
+    .bottom-nav button {
+        padding: 6px 14px;
+        font-size: 0.7rem;
+    }
+
+    .primary-btn {
+        padding: 12px 32px;
+        font-size: 0.9rem;
+    }
+
+    .hero-image-wrapper img {
+        max-height: 250px;
+    }
+
+    .question-box,
+    .answer-box,
+    .takeaway-box {
+        padding: 14px 16px;
+    }
+}
+
+/* Fix for very small screens */
+@media (max-width: 360px) {
+    .home-container h1 {
+        font-size: 1.8rem;
+    }
+
+    .book-container {
+        padding: 12px 10px 20px;
+        margin: 4px 4px 28px;
+    }
+
+    .chapter-image-wrapper img {
+        max-height: 120px;
+    }
+
+    #chapterTitle {
+        font-size: 1.1rem;
+    }
+
+    .story-text {
+        font-size: 0.85rem;
+    }
+
+    .lang-btn {
+        font-size: 0.55rem;
+        padding: 2px 8px;
+    }
+
+    .nav-btn {
+        padding: 6px 14px;
+        font-size: 0.7rem;
+    }
+
+    .bottom-nav button {
+        padding: 4px 10px;
+        font-size: 0.6rem;
     }
 }
