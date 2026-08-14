@@ -9,6 +9,9 @@
 </head>
 <body>
 
+    <!-- "राम" Floating Text Background -->
+    <div class="ram-flakes-container" id="ramFlakesContainer"></div>
+
     <!-- ==================== HOME PAGE ==================== -->
     <div id="homePage" class="page active">
         <div class="home-container">
@@ -27,6 +30,18 @@
                 </p>
                 <button class="primary-btn" onclick="startReading()">Begin Your Journey</button>
                 <p class="progress-hint" id="progressHint">Your progress is saved on this device.</p>
+                
+                <!-- Homepage Footer -->
+                <div class="home-footer">
+                    <p class="credit-text">Created by Varaang Sharma</p>
+                    <p class="credit-email">varaangsharma@gmail.com</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/varaang_sharma/" target="_blank" class="social-link instagram">
+                            Instagram: @varaang_sharma
+                        </a>
+                    </div>
+                    <p class="credit-purpose">Dedicated to spreading the eternal wisdom of Ramayana</p>
+                </div>
             </div>
         </div>
     </div>
@@ -53,6 +68,13 @@
                 </div>
             </div>
 
+            <!-- Top Navigation -->
+            <div class="nav-buttons-top">
+                <button class="nav-btn-top" onclick="prevChapter()">← Previous</button>
+                <span class="chapter-counter-top" id="chapterCounterTop">1 / 12</span>
+                <button class="nav-btn-top" onclick="nextChapter()">Next →</button>
+            </div>
+
             <!-- Chapter Image - Desktop Only -->
             <div class="chapter-image-wrapper desktop-only">
                 <img id="chapterImage" src="ramayan-images/bal-kand-cover.jpg" alt="Chapter Image" />
@@ -66,7 +88,7 @@
                 <p id="settingText">Loading...</p>
             </div>
 
-            <!-- Story Content (3 languages) -->
+            <!-- Story Content -->
             <div id="storyContent" class="story-text">
                 Loading...
             </div>
@@ -95,7 +117,7 @@
                 <textarea id="userNote" placeholder="Write your thoughts here... Your notes are saved automatically."></textarea>
             </div>
 
-            <!-- Navigation -->
+            <!-- Bottom Navigation -->
             <div class="nav-buttons">
                 <button class="nav-btn" onclick="prevChapter()">Previous</button>
                 <span class="chapter-counter" id="chapterCounter">1 / 12</span>
@@ -109,7 +131,7 @@
     <div id="charactersPage" class="page">
         <div class="characters-container">
             <div class="characters-header">
-                <button class="back-home" onclick="goHome()">Home</button>
+                <button class="back-home" onclick="goHome()">← Home</button>
                 <h1>The Heroes</h1>
                 <p>What they teach you about your own potential.</p>
             </div>
@@ -211,10 +233,87 @@
         </div>
     </div>
 
+    <!-- ==================== ABOUT PAGE ==================== -->
+    <div id="aboutPage" class="page">
+        <div class="about-container">
+            <button class="back-home" onclick="goHome()">← Home</button>
+            
+            <div class="about-content">
+                <h1>About This Website</h1>
+                
+                <div class="about-divider"></div>
+                
+                <p class="about-intro">
+                    The Ramayana is not just an ancient story. It is a manual for living.
+                </p>
+                
+                <div class="about-message">
+                    <p>
+                        I grew up hearing the stories of Ram, Sita, Lakshman, and Hanuman. Like many of you, 
+                        I knew the names, the places, and the basic plot. But I never really understood the 
+                        <strong>power</strong> of these stories until I faced real challenges in my own life.
+                    </p>
+                    <p>
+                        When I felt lost, I looked at Ram—who lost his kingdom, his father, and his wife, 
+                        yet never lost his purpose.
+                    </p>
+                    <p>
+                        When I felt afraid, I looked at Hanuman—who stood at the edge of an ocean and leaped 
+                        anyway, because he believed in something greater than himself.
+                    </p>
+                    <p>
+                        When I felt angry, I looked at Ram—who fought a war with precision, not hatred, 
+                        and forgave even his enemies.
+                    </p>
+                    <p>
+                        When I felt betrayed, I looked at Ram—who accepted exile with grace and turned 
+                        his suffering into strength.
+                    </p>
+                </div>
+                
+                <div class="about-lessons">
+                    <h2>What I Learned from Ramayana</h2>
+                    <ul>
+                        <li>True strength is not showing off your power—it is choosing when to use it.</li>
+                        <li>Loyalty is not a word; it is showing up when it is inconvenient.</li>
+                        <li>Loss is not the end; it is a turning point to become stronger.</li>
+                        <li>Anger is not the enemy; uncontrolled anger is. Use it to fix, not to destroy.</li>
+                        <li>Forgiveness is not for them; it is for you. It frees you from the prison of resentment.</li>
+                        <li>You are stronger than you think. You just need someone to remind you—or you need to remind yourself.</li>
+                        <li>Purpose is not found; it is built—one disciplined action at a time.</li>
+                    </ul>
+                </div>
+                
+                <div class="about-closing">
+                    <p>
+                        I created this website in the hope that it will change your life the way 
+                        these stories changed mine.
+                    </p>
+                    <p>
+                        Ram was human. He faced loss, betrayal, and war. He never gave up. 
+                        <strong>Neither should you.</strong>
+                    </p>
+                </div>
+                
+                <div class="about-footer">
+                    <p>With gratitude,</p>
+                    <p class="about-name">Varaang Sharma</p>
+                    <p class="about-email">varaangsharma@gmail.com</p>
+                    <div class="about-social">
+                        <a href="https://www.instagram.com/varaang_sharma/" target="_blank" class="social-link instagram">
+                            Instagram: @varaang_sharma
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ==================== FOOTER NAVIGATION (Fixed at bottom) ==================== -->
     <div class="bottom-nav" id="bottomNav">
         <button onclick="goHome()">Home</button>
         <button onclick="showCharacters()">Heroes</button>
+        <button onclick="showAbout()">About</button>
         <button onclick="startReading()">Read</button>
     </div>
 
