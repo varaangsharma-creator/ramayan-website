@@ -8,59 +8,6 @@ let totalChapters = 0;
 // FLOATING "राम" FLAKES - OPTIMIZED VERSION
 // ============================================================
 
-(function createRamFlakes() {
-    try {
-        var container = document.getElementById('ramFlakesContainer');
-        if (!container) return;
-        
-        // Colors
-        var colors = ['golden', 'red', 'orange'];
-        
-        // Sizes - smaller for performance
-        var sizes = [16, 20, 24, 28, 32, 36];
-        
-        // VERY FEW flakes for performance
-        var count = 10;  // Reduced from 30 to 10
-        
-        // Even fewer on mobile
-        if (window.innerWidth < 480) count = 4;
-        else if (window.innerWidth < 768) count = 6;
-        
-        for (var i = 0; i < count; i++) {
-            var flake = document.createElement('div');
-            
-            var color = colors[Math.floor(Math.random() * colors.length)];
-            var size = sizes[Math.floor(Math.random() * sizes.length)];
-            
-            // Slower animation for smoother performance
-            var duration = 20 + Math.random() * 15;  // 20-35 seconds
-            var delay = Math.random() * 20;
-            
-            var left = Math.random() * 90 + 5;  // 5% to 95%
-            var drift = (Math.random() - 0.5) * 150;
-            var rotation = Math.random() * 360;
-            
-            flake.className = 'ram-flake ' + color;
-            flake.textContent = 'राम';
-            
-            flake.style.fontSize = size + 'px';
-            flake.style.left = left + '%';
-            flake.style.bottom = '-50px';  // Start from bottom
-            
-            flake.style.setProperty('--duration', duration + 's');
-            flake.style.setProperty('--drift', drift + 'px');
-            
-            flake.style.animationDuration = duration + 's';
-            flake.style.animationDelay = delay + 's';
-            flake.style.transform = 'rotate(' + rotation + 'deg)';
-            
-            container.appendChild(flake);
-        }
-    } catch(e) {
-        // Silently fail if there's an error - website still works
-        console.log('Flakes disabled');
-    }
-})();
 
 // ============================================================
 // DOM REFS
