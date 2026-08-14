@@ -64,6 +64,35 @@ body {
 }
 
 /* ============================================================
+   HIDE IMAGES ON MOBILE - FIX FOR IMAGE ERRORS
+   ============================================================ */
+.desktop-only {
+    display: block;
+}
+
+/* Hide all images on mobile devices */
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none !important;
+    }
+    
+    /* Hide hero image on mobile */
+    .hero-image-wrapper {
+        display: none !important;
+    }
+    
+    /* Hide chapter images on mobile */
+    .chapter-image-wrapper {
+        display: none !important;
+    }
+    
+    /* Hide character images on mobile */
+    .character-image-wrapper {
+        display: none !important;
+    }
+}
+
+/* ============================================================
    PAGES
    ============================================================ */
 .page {
@@ -302,7 +331,7 @@ body {
     color: #ffffff;
 }
 
-/* Chapter Image - FIXED FOR MOBILE */
+/* Chapter Image - Desktop Only */
 .chapter-image-wrapper {
     width: 100%;
     border-radius: 16px;
@@ -320,11 +349,15 @@ body {
     display: block;
 }
 
-/* Character Images - FIXED FOR MOBILE */
-.character-card img {
+/* Character Images - Desktop Only */
+.character-image-wrapper {
     width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.character-image-wrapper img {
+    width: 100%;
+    height: 240px;
     object-fit: cover;
     display: block;
 }
@@ -575,13 +608,6 @@ body {
     box-shadow: var(--shadow-hover);
 }
 
-.character-card img {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-    display: block;
-}
-
 .character-card h3 {
     font-size: 1.4rem;
     font-weight: 700;
@@ -642,9 +668,9 @@ body {
 }
 
 /* ============================================================
-   RESPONSIVE - FIXED FOR MOBILE
+   RESPONSIVE - IMAGES HIDDEN ON MOBILE
    ============================================================ */
-@media (max-width: 720px) {
+@media (max-width: 768px) {
     .home-container h1 {
         font-size: 2.6rem;
     }
@@ -695,10 +721,6 @@ body {
         grid-template-columns: 1fr 1fr;
     }
 
-    .character-card img {
-        height: 180px;
-    }
-
     .theme-toggle {
         top: 12px;
         right: 12px;
@@ -718,10 +740,6 @@ body {
     .primary-btn {
         padding: 14px 40px;
         font-size: 1rem;
-    }
-
-    .chapter-image-wrapper img {
-        max-height: 200px;
     }
 }
 
@@ -756,10 +774,6 @@ body {
         gap: 20px;
     }
 
-    .character-card img {
-        height: 200px;
-    }
-
     .top-bar {
         flex-direction: column;
         gap: 10px;
@@ -782,10 +796,6 @@ body {
     .lang-btn {
         font-size: 0.65rem;
         padding: 3px 10px;
-    }
-
-    .chapter-image-wrapper img {
-        max-height: 160px;
     }
 
     #chapterTitle {
@@ -812,10 +822,6 @@ body {
         font-size: 0.9rem;
     }
 
-    .hero-image-wrapper img {
-        max-height: 250px;
-    }
-
     .question-box,
     .answer-box,
     .takeaway-box {
@@ -823,7 +829,6 @@ body {
     }
 }
 
-/* Fix for very small screens */
 @media (max-width: 360px) {
     .home-container h1 {
         font-size: 1.8rem;
@@ -832,10 +837,6 @@ body {
     .book-container {
         padding: 12px 10px 20px;
         margin: 4px 4px 28px;
-    }
-
-    .chapter-image-wrapper img {
-        max-height: 120px;
     }
 
     #chapterTitle {
