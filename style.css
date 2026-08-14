@@ -1,6 +1,24 @@
 /* ============================================================
    RESET & BASE
    ============================================================ */
+/* ============================================================
+   PERFORMANCE FIX - REDUCE ANIMATION LOAD
+   ============================================================ */
+
+/* Only animate if user doesn't prefer reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+    .ram-flake {
+        animation-duration: calc(var(--duration) * 1) !important;
+    }
+}
+
+/* For users who prefer reduced motion - turn off animations */
+@media (prefers-reduced-motion: reduce) {
+    .ram-flake {
+        animation: none !important;
+        display: none !important;
+    }
+}
 * {
     margin: 0;
     padding: 0;
