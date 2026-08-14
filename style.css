@@ -401,7 +401,9 @@ body {
     color: #ffffff;
 }
 
-/* Top Navigation */
+/* ============================================================
+   TOP NAVIGATION BUTTONS
+   ============================================================ */
 .nav-buttons-top {
     display: flex;
     justify-content: space-between;
@@ -609,7 +611,7 @@ body {
     opacity: 0.6;
 }
 
-/* Bottom Navigation */
+/* Bottom Navigation inside reading page */
 .nav-buttons {
     display: flex;
     justify-content: space-between;
@@ -910,7 +912,7 @@ body {
 }
 
 /* ============================================================
-   BOTTOM NAVIGATION
+   BOTTOM NAVIGATION (Fixed at bottom)
    ============================================================ */
 .bottom-nav {
     position: fixed;
