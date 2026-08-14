@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ramayana - Eternal Wisdom for Modern Life</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Noto+Serif+Devanagari:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- ==================== HOME PAGE ==================== -->
+    <div id="homePage" class="page active">
+        <div class="home-container">
+            <div class="theme-toggle" onclick="toggleTheme()">
+                <span id="themeIcon">Dark</span>
+            </div>
+            <div class="home-content">
+                <h1>Ramayana</h1>
+                <p class="subtitle">Eternal Wisdom for the Modern Warrior</p>
+                <div class="hero-image-wrapper">
+                    <img src="ramayan-images/hero-home.jpg" alt="Lord Ram" id="heroImage" />
+                </div>
+                <p class="hero-text">
+                    He was human. He faced loss, betrayal, and war.<br />
+                    He never gave up. Neither should you.
+                </p>
+                <button class="primary-btn" onclick="startReading()">Begin Your Journey</button>
+                <p class="progress-hint" id="progressHint">Your progress is saved on this device.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== READING PAGE ==================== -->
+    <div id="readingPage" class="page">
+        <div class="book-container">
+            
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="top-left">
+                    <button class="back-home" onclick="goHome()">Home</button>
+                    <span class="chapter-badge">Chapter <span id="chapterNumDisplay">1</span></span>
+                </div>
+                <div class="top-right">
+                    <div class="language-switch">
+                        <button onclick="setLanguage('sa')" id="lang-sa" class="lang-btn">संस्कृत</button>
+                        <button onclick="setLanguage('hi')" id="lang-hi" class="lang-btn">हिन्दी</button>
+                        <button onclick="setLanguage('en')" id="lang-en" class="lang-btn active-lang">English</button>
+                    </div>
+                    <div class="theme-toggle-small" onclick="toggleTheme()">
+                        <span id="themeIconSmall">Dark</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapter Image -->
+            <div class="chapter-image-wrapper">
+                <img id="chapterImage" src="ramayan-images/bal-kand-cover.jpg" alt="Chapter Image" />
+            </div>
+
+            <!-- Chapter Title -->
+            <h2 id="chapterTitle">Loading...</h2>
+
+            <!-- Setting the Scene -->
+            <div class="setting-box">
+                <p id="settingText">Loading...</p>
+            </div>
+
+            <!-- Story Content (3 languages) -->
+            <div id="storyContent" class="story-text">
+                Loading...
+            </div>
+
+            <!-- The Question -->
+            <div class="question-box">
+                <h3>The Question</h3>
+                <p id="questionText">Loading...</p>
+            </div>
+
+            <!-- Ram's Answer -->
+            <div class="answer-box">
+                <h3>Ram's Answer</h3>
+                <p id="answerText">Loading...</p>
+            </div>
+
+            <!-- Your Takeaway -->
+            <div class="takeaway-box">
+                <h3>Your Takeaway</h3>
+                <p id="takeawayText">Loading...</p>
+            </div>
+
+            <!-- Personal Note -->
+            <div class="note-box">
+                <label for="userNote">Your personal reflection on this chapter:</label>
+                <textarea id="userNote" placeholder="Write your thoughts here... Your notes are saved automatically."></textarea>
+            </div>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevChapter()">Previous</button>
+                <span class="chapter-counter" id="chapterCounter">1 / 12</span>
+                <button class="nav-btn" onclick="nextChapter()">Next</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==================== CHARACTERS PAGE ==================== -->
+    <div id="charactersPage" class="page">
+        <div class="characters-container">
+            <div class="characters-header">
+                <button class="back-home" onclick="goHome()">Home</button>
+                <h1>The Heroes</h1>
+                <p>What they teach you about your own potential.</p>
+            </div>
+
+            <div class="characters-grid">
+
+                <!-- Lord Ram -->
+                <div class="character-card">
+                    <img src="ramayan-images/character-ram.jpg" alt="Lord Ram" />
+                    <h3>Lord Ram</h3>
+                    <p class="character-title">The Perfect Warrior &amp; The Wisest King</p>
+                    <p class="character-teaching">
+                        True power is not in showing off your strength, but in choosing when to use it. 
+                        Be so strong that you can afford to be kind. Ram fought as a human to prove 
+                        that divinity is achieved through discipline, not birth.
+                    </p>
+                </div>
+
+                <!-- Sita -->
+                <div class="character-card">
+                    <img src="ramayan-images/character-sita.jpg" alt="Mata Sita" />
+                    <h3>Mata Sita</h3>
+                    <p class="character-title">Unshakable Inner Strength</p>
+                    <p class="character-teaching">
+                        Your character is defined not by your circumstances, but by how you hold yourself 
+                        during the storm. Even in captivity, Sita never lost her dignity. She was Ram's 
+                        equal in intellect, courage, and faith.
+                    </p>
+                </div>
+
+                <!-- Lakshman -->
+                <div class="character-card">
+                    <img src="ramayan-images/character-lakshman.jpg" alt="Lakshman" />
+                    <h3>Lakshman</h3>
+                    <p class="character-title">The Ultimate Protector</p>
+                    <p class="character-teaching">
+                        True loyalty means showing up, even when it is inconvenient. Lakshman gave up 
+                        royal comfort to serve his brother in the jungle. Be the person that others can 
+                        count on without hesitation.
+                    </p>
+                </div>
+
+                <!-- Hanuman -->
+                <div class="character-card">
+                    <img src="ramayan-images/character-hanuman.jpg" alt="Hanuman" />
+                    <h3>Hanuman</h3>
+                    <p class="character-title">Unlimited Potential Realized Through Faith</p>
+                    <p class="character-teaching">
+                        You are stronger than you think. You just need to remember who you are and why 
+                        you are here. Hanuman crossed an ocean on faith alone because he believed in 
+                        his purpose.
+                    </p>
+                </div>
+
+                <!-- Bharat -->
+                <div class="character-card">
+                    <img src="ramayan-images/character-bharat.jpg" alt="Bharat" />
+                    <h3>Bharat</h3>
+                    <p class="character-title">The King Who Never Sat on the Throne</p>
+                    <p class="character-teaching">
+                        Leadership is not about titles. It is about serving. Bharat ruled as a caretaker, 
+                        keeping the kingdom ready for Ram's return. Do your duty even when no one is watching.
+                    </p>
+                </div>
+
+                <!-- Kaikeyi -->
+                <div class="character-card">
+                    <img src="ramayan-images/character-kaikeyi.jpg" alt="Kaikeyi" />
+                    <h3>Kaikeyi</h3>
+                    <p class="character-title">The Power of Repentance</p>
+                    <p class="character-teaching">
+                        You are not your worst mistake. What matters is whether you are brave enough to 
+                        admit you were wrong. Kaikeyi made a terrible error, but she lived with her guilt 
+                        and accepted Ram's forgiveness.
+                    </p>
+                </div>
+
+                <!-- Vibhishana -->
+                <div class="character-card">
+                    <img src="ramayan-images/character-vibhishana.jpg" alt="Vibhishana" />
+                    <h3>Vibhishana</h3>
+                    <p class="character-title">Loyalty to Truth Above All</p>
+                    <p class="character-teaching">
+                        Loyalty to truth is greater than loyalty to people. Vibhishana chose dharma over 
+                        blood. Stand with what is right, even if you stand alone.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== FOOTER NAVIGATION (Fixed at bottom) ==================== -->
+    <div class="bottom-nav" id="bottomNav">
+        <button onclick="goHome()">Home</button>
+        <button onclick="showCharacters()">Heroes</button>
+        <button onclick="startReading()">Read</button>
+    </div>
+
+    <script src="story-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
